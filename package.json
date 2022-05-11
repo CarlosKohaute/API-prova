@@ -1,0 +1,29 @@
+{
+  "name": "api-prova",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index",
+    "dev": "nodemon index"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CarlosKohaute/API-prova.git"
+  },
+  "author": "Carlos",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CarlosKohaute/API-prova/issues"
+  },
+  "homepage": "https://github.com/CarlosKohaute/API-prova#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "node": "^17.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}
