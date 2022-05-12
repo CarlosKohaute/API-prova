@@ -10,7 +10,6 @@ route.get('/api-docs', swaggerUi.setup(swaggerDocument));
 const {
   validId,
   validObjectBody,
-  validObjectBodyCart,
 } = require('../middlewares/meta.middleware');
 
 
