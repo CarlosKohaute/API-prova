@@ -1,0 +1,315 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "API Kohaute Place",
+    "description": "API para CRUD marketplace de celulares e carrinho de compras",
+    "termsOfService": "",
+    "contact": {
+      "email": "carlos.kohaute.contato@gmail.com"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+      {
+        "url": "http://localhost:3000/cells",
+        "description": "API de teste"
+      },
+      {
+        "url": "https://api-marketplacekohaute.onrender.com/cells",
+        "description": "API de produção"
+      }
+    ],
+    "paths": {
+      "/find-cells": {
+        "get": {
+          "summary": "Lista de todos os celulares",
+          "description": "Rota responsável por listar todos os celulares",
+          "tags": ["Cells"],
+          "responses": {
+            "404": {
+              "description": "Not Found"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Cells"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/find-one-cell/{id}": {
+        "get": {
+          "summary": "Busca um celular pelo ID",
+          "description": "Rota responsável por buscar um celular pelo ID",
+          "tags": ["Cells"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Id do celular para a busca",
+              "required": true
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Bad Request"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Cells"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/create": {
+        "post": {
+          "summary": "Cadastrar um celular",
+          "description": "Rota responsável por cadastrar um celular",
+          "tags": ["Cells"],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cells"
+                },
+                "examples": {
+                  "Cells": {
+                    "value": {
+                      "name": "Xiaomi 12 PRO",
+                      "description": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+                      "photo": "./assets/images/xiaomi12pro.png",
+                      "price": 4000
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "400": {
+              "description": "Bad Request"
+            },
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Cells"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/update/{id}": {
+        "put": {
+          "summary": "Editar um celular pelo ID",
+          "description": "Rota responsável por editar um celular pelo ID",
+          "tags": ["Cells"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Id do celular para a busca",
+              "required": true
+            }
+          ],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cells"
+                },
+                "examples": {
+                  "Cells": {
+                    "value": {
+                      "name": "Xiaomi Editado",
+                      "description": "Quam vulputate dignissim suspendisse in est ante in nibh mauris.",
+                      "photo": "./assets/images/xiaomi12pro.png",
+                      "price": 4500
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "400": {
+              "description": "Bad Request"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "$ref": "#/components/schemas/Cells"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/delete/{id}": {
+        "delete": {
+          "summary": "Apagar um celular pelo ID",
+          "description": "Rota responsável por apagar um celular pelo ID",
+          "tags": ["Cells"],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "description": "Id do celular para deleção",
+              "required": true
+            }
+          ],
+          "responses": {
+            "400": {
+              "description": "Bad Request"
+            },
+            "200": {
+              "description": "OK"
+            }
+          }
+        }
+      },
+      "/all-cart": {
+        "get": {
+          "summary": "Lista de todos os itens do carrinho",
+          "description": "Rota responsável por listar todos os itens do carrinho",
+          "tags": ["Cart"],
+          "responses": {
+            "404": {
+              "description": "Not Found"
+            },
+            "200": {
+              "description": "OK",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Cart"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/create-cart": {
+        "post": {
+          "summary": "Cadastrar vários itens no carrinho",
+          "description": "Rota responsável por cadastrar vários itens no carrinho",
+          "tags": ["Cart"],
+          "requestBody": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Cart"
+                },
+                "examples": {
+                  "Cart": {
+                    "value": [
+                      {
+                        "cellId": "624230fdcd38269205c82197",
+                        "theAmount": 5
+                      },
+                      {
+                        "cellId": "62423c1e618f4a4738a5ee75",
+                        "theAmount": 2
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "responses": {
+            "400": {
+              "description": "Bad Request"
+            },
+            "201": {
+              "description": "Created",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Cart"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/finish-cart": {
+          "delete": {
+            "summary": "Apagar todos os itens do carrinho",
+            "description": "Rota responsável por apagar todos os itens do carrinho",
+            "tags": ["Cart"],
+            "responses": {
+              "400": {
+                "description": "Bad Request"
+              },
+              "200": {
+                "description": "OK"
+              }
+            }
+          }
+        }
+    },
+    "components": {
+      "schemas": {
+        "Cells": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "photo": {
+              "type": "string"
+            },
+            "price": {
+              "type": "number"
+            }
+          }
+        },
+        "Cart": {
+          "type": "object",
+          "properties": {
+            "cellId": {
+              "type": "string"
+            },
+            "theAmount": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    }
+  }

@@ -1,26 +1,17 @@
+require('dotenv').config();
 const express = require('express');
-const port = 3000;
-const app = express;
+const port = process.env.PORT || 3000;
+const app = express();
+const cors = require('cors');
+const routes = require('./src/routes/meta.route');
+const connectToDatabase = require('./src/database/database');
 
-app.request(cors());
+connectToDatabase();
+
 app.use(express.json());
+app.use(cors());
 
-const objetives = [
-  {
-    id: 1,
-    name: 'Celular',
-    price: 4000,
-  },
-  {
-    id: 2,
-    name: 'Habilitação',
-    price: 1800,
-  },
-];
-
-app.get('/', function (req, res) {
-  res.send('Hello World');
-});
+app.use('/meta', routes);
 
 app.listen(port, () => {
   console.log(`Server on port ${port}`);

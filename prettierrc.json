@@ -1,7 +1,7 @@
 {
   "trailingComma": "all",
-  "singleQuote": true,
-  "endOfLine": "lf",
+  "singleQuote":true,
+  "endOfLine": "If",
   "tabWidth": 2,
   "arrowParens": "always",
   "printWidth": 80
